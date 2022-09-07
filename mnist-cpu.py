@@ -1,3 +1,5 @@
+# Credit to Graphcore tutorials https://github.com/graphcore/tutorials.git
+
 import tensorflow.keras as keras
 import numpy as np
 
