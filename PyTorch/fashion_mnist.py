@@ -4,7 +4,7 @@ import poptorch
 import torchvision
 import torch.nn as nn
 import matplotlib.pyplot as plt
-from sklearn.metrics import accuracy_score, confusion_matrix, ConfusionMatrixDisplay
+from sklearn.metrics import accuracy_score
 from tqdm import tqdm
 
 # Note: Under the hood, PopTorch uses Graphcore's high-performance machine learning framework PopART. It is therefore necessary to enable PopART and Poplar in your environment.
