@@ -16,15 +16,15 @@ Credit to Graphcore tutorials https://github.com/graphcore/examples/tree/master/
     ```
     ssh poplar2
     ```
-- Change to your scratch directory:
+- Change to your directory:
     ```
-    cd $SCRATCH
+    cd /localdata/$USER && mkdir ipu_labs && cd ipu_labs
     ```
-- Copy the example materials to your scratch directory:
+- Copy the example materials to your directory:
     ```
     git clone https://github.com/graphcore/examples.git
     ```
-- Copy the hands-on exercise materials to your scratch directory:
+- Copy the hands-on exercise materials to your directory:
     ```
     git clone https://github.com/happidence1/IPU-Training.git
     ```
@@ -73,7 +73,7 @@ watch -n 2 gc-monitor
 #### PopTorch Virtual Environment Setup
 
 ```
-cd $SCRATCH
+cd /localdata/$USER/ipu_labs
 
 virtualenv -p python3 poptorch_test
 
@@ -85,7 +85,7 @@ python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bb
 #### Run a PopTorch model on IPU
 
 ```
-cd $SCRATCH/examples/tutorials/simple_applications/pytorch/mnist/
+cd examples/tutorials/simple_applications/pytorch/mnist/
 
 pip install -r requirements.txt
 
@@ -155,7 +155,7 @@ The tf.distribute.Strategy is an API to distribute training and inference across
 
 - Activate the TF virtual environment
     ```
-    cd $SCRATCH
+    cd /localdata/$USER/ipu_labs
     source venv_tf2/bin/activate
     ```
 - Change directory to Keras
@@ -275,9 +275,9 @@ print(f"Eval accuracy: {100 * accuracy_score(labels, predictions):.2f}%")
 
 #### Hands-on Session 3
 
-- Activate the TF virtual environment
+- Activate the PopTorch virtual environment
     ```
-    cd $SCRATCH
+    cd /localdata/$USER/ipu_labs
     source poptorch_test/bin/activate
     ```
 - Change directory to PyTorch
@@ -287,7 +287,7 @@ print(f"Eval accuracy: {100 * accuracy_score(labels, predictions):.2f}%")
 - Complete the #Todos in the fashion-mnist-pytorch-ipu-todo.py file.
 - Run it in the poptorch_test virtual environment.
     ```
-    pip install scikit-learn
+    pip install -r requirements.txt
     python fashion-mnist-pytorch-ipu-todo.py
     ```
 - After finishing the job, you can deactivate the virtual environment
