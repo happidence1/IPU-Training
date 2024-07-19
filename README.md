@@ -48,8 +48,6 @@ virtualenv -p python3 venv_tf2
 
 source venv_tf2/bin/activate
 
-python -m pip install -U pip
-
 python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/tensorflow-2.6.3+gc3.3.0+251582+08d96978c7f+intel_skylake512-cp38-cp38-linux_x86_64.whl
 ```
 
@@ -80,8 +78,6 @@ cd $SCRATCH
 virtualenv -p python3 poptorch_test
 
 source poptorch_test/bin/activate
-
-python -m pip install -U pip
 
 python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poptorch-3.3.0+113432_960e9c294b_ubuntu_20_04-cp38-cp38-linux_x86_64.whl
 ```
