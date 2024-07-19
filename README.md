@@ -177,7 +177,7 @@ The tf.distribute.Strategy is an API to distribute training and inference across
 #### Training a model on IPU
 
 - Import the packages
-    ```
+    ```python
     import torch
     import poptorch
     import torchvision
