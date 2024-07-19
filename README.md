@@ -36,9 +36,9 @@ source /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubunt
 
 source /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/popart-ubuntu_20_04-3.3.0+7857-b67b751185/enable.sh
 
-mkdir -p $SCRATCH/tmp
-export TF_POPLAR_FLAGS=--executable_cache_path=$SCRATCH/tmp
-export POPTORCH_CACHE_DIR=$SCRATCH/tmp
+mkdir -p /localdata/$USER/tmp
+export TF_POPLAR_FLAGS=--executable_cache_path=/localdata/$USER/tmp
+export POPTORCH_CACHE_DIR=/localdata/$USER/tmp
 ```
 
 #### TF Virtual Environment Setup
