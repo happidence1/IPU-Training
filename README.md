@@ -206,7 +206,7 @@ poptorch_model_inf.detachFromDevice()
 print(f"Eval accuracy: {100 * accuracy_score(labels, predictions):.2f}%")
 ```
 
-#### Hands-on Session 3
+#### Hands-on Session 2
 
 - Activate the PopTorch virtual environment
     ```
@@ -275,7 +275,7 @@ strategy = ipu.ipu_strategy.IPUStrategy()
 
 The tf.distribute.Strategy is an API to distribute training and inference across multiple devices. IPUStrategy is a subclass which targets a system with one or more IPUs attached.
 
-#### Hands-on Session 2
+#### Hands-on Session 3
 
 - Activate the TF virtual environment
     ```
