@@ -105,75 +105,7 @@ python mnist_poptorch.py
 watch -n 2 gc-monitor
 ```
 
-### Section III. Porting TensorFlow Code to IPU
-
-#### 1. Import the TensorFlow IPU module
-
-Add the following import statement to the beginning of your script:
-
-```python
-from tensorflow.python import ipu
-```
-
-#### 2. Preparing the dataset
-
-- Make sure the sizes of the datasets are divisible by the batch size
-    ```python
-    def make_divisible(number, divisor):
-        return number - number % divisor
-    ```
-- Adjust dataset lengths
-    ```python
-    (x_train, y_train), (x_test, y_test) = load_data()
-    train_data_len = x_train.shape[0]
-    train_data_len = make_divisible(train_data_len, batch_size)
-    x_train, y_train = x_train[:train_data_len], y_train[:train_data_len]
-    test_data_len = x_test.shape[0]
-    test_data_len = make_divisible(test_data_len, batch_size)
-    x_test, y_test = x_test[:test_data_len], y_test[:test_data_len]
-    ```
-
-#### 3. Add IPU configuration
-
-To use the IPU, you must create an IPU session configuration:
-```
-ipu_config = ipu.config.IPUConfig()
-ipu_config.auto_select_ipus = 1
-ipu_config.configure_ipu_system()
-```
-
-A full list of configuration options is available in the [API documentation](https://docs.graphcore.ai/projects/tensorflow-user-guide/en/latest/tensorflow/api.html#tensorflow.python.ipu.config.IPUConfig).
-
-#### 4. Specify IPU strategy
-
-```
-strategy = ipu.ipu_strategy.IPUStrategy()
-```
-
-The tf.distribute.Strategy is an API to distribute training and inference across multiple devices. IPUStrategy is a subclass which targets a system with one or more IPUs attached.
-
-#### Hands-on Session 2
-
-- Activate the TF virtual environment
-    ```
-    cd /localdata/$USER/ipu_labs
-    source venv_tf2/bin/activate
-    ```
-- Change directory to Keras
-    ```
-    cd IPU-Training/Keras
-    ```
-- Complete the #Todos in the mnist-ipu-todo.py file.
-- Run it in the venv_tf2 virtual environment.
-    ```
-    python mnist-ipu-todo.py
-    ```
-- After finishing the job, you can deactivate the virtual environment
-    ```
-    deactivate
-    ```
-
-### Section IV. Porting PyTorch Code to IPU
+### Section III. Porting PyTorch Code to IPU
 
 #### Training a model on IPU
 
@@ -295,3 +227,73 @@ print(f"Eval accuracy: {100 * accuracy_score(labels, predictions):.2f}%")
 ```
 deactivate
 ```
+
+### Section IV. Porting TensorFlow Code to IPU
+
+#### 1. Import the TensorFlow IPU module
+
+Add the following import statement to the beginning of your script:
+
+```python
+from tensorflow.python import ipu
+```
+
+#### 2. Preparing the dataset
+
+- Make sure the sizes of the datasets are divisible by the batch size
+    ```python
+    def make_divisible(number, divisor):
+        return number - number % divisor
+    ```
+- Adjust dataset lengths
+    ```python
+    (x_train, y_train), (x_test, y_test) = load_data()
+    train_data_len = x_train.shape[0]
+    train_data_len = make_divisible(train_data_len, batch_size)
+    x_train, y_train = x_train[:train_data_len], y_train[:train_data_len]
+    test_data_len = x_test.shape[0]
+    test_data_len = make_divisible(test_data_len, batch_size)
+    x_test, y_test = x_test[:test_data_len], y_test[:test_data_len]
+    ```
+
+#### 3. Add IPU configuration
+
+To use the IPU, you must create an IPU session configuration:
+```
+ipu_config = ipu.config.IPUConfig()
+ipu_config.auto_select_ipus = 1
+ipu_config.configure_ipu_system()
+```
+
+A full list of configuration options is available in the [API documentation](https://docs.graphcore.ai/projects/tensorflow-user-guide/en/latest/tensorflow/api.html#tensorflow.python.ipu.config.IPUConfig).
+
+#### 4. Specify IPU strategy
+
+```
+strategy = ipu.ipu_strategy.IPUStrategy()
+```
+
+The tf.distribute.Strategy is an API to distribute training and inference across multiple devices. IPUStrategy is a subclass which targets a system with one or more IPUs attached.
+
+#### Hands-on Session 2
+
+- Activate the TF virtual environment
+    ```
+    cd /localdata/$USER/ipu_labs
+    source venv_tf2/bin/activate
+    ```
+- Change directory to Keras
+    ```
+    cd IPU-Training/Keras
+    ```
+- Complete the #Todos in the mnist-ipu-todo.py file.
+- Run it in the venv_tf2 virtual environment.
+    ```
+    python mnist-ipu-todo.py
+    ```
+- After finishing the job, you can deactivate the virtual environment
+    ```
+    deactivate
+    ```
+
+
