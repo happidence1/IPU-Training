@@ -303,3 +303,18 @@ The tf.distribute.Strategy is an API to distribute training and inference across
 num_ipus = num_replicas = 2
 ```
 
+#### 2. Set the steps per execution and adjust data length.
+
+```python
+(x_train, y_train), (x_test, y_test) = load_data()
+
+train_data_len = x_train.shape[0]
+train_steps_per_execution = train_data_len // (batch_size * num_replicas)
+train_data_len = make_divisible(train_data_len, batch_size * num_replicas)
+x_train, y_train = x_train[:train_data_len], y_train[:train_data_len]
+
+test_data_len = x_test.shape[0]
+test_steps_per_execution = test_data_len // (batch_size * num_replicas)
+test_data_len = make_divisible(test_data_len, batch_size * num_replicas)
+x_test, y_test = x_test[:test_data_len], y_test[:test_data_len]
+```
