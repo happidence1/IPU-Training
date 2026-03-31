@@ -295,5 +295,11 @@ The tf.distribute.Strategy is an API to distribute training and inference across
     ```
     deactivate
     ```
+### Section V. Model Replication
 
+#### 1. Set the number of IPUs and replicas
+
+```
+num_ipus = num_replicas = 2
+```
 
