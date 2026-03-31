@@ -330,3 +330,21 @@ ipu_config.device_connection.type = ipu.config.DeviceConnectionType.ON_DEMAND
 ipu_config.auto_select_ipus = num_ipus
 ipu_config.configure_ipu_system()
 ```
+#### 4. Add steps per execution to model compile
+
+```python
+    model.compile(
+        "sgd",
+        "categorical_crossentropy",
+        metrics=["accuracy"],
+        steps_per_execution=train_steps_per_execution,
+    )
+```
+```python
+   model.compile(
+        "sgd",
+        "categorical_crossentropy",
+        metrics=["accuracy"],
+        steps_per_execution=test_steps_per_execution,
+    )
+```
