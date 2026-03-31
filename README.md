@@ -348,3 +348,76 @@ ipu_config.configure_ipu_system()
         steps_per_execution=test_steps_per_execution,
     )
 ```
+### Section VI. Model Pipelining
+
+#### 1. Set multi-IPU and pipelining config variables
+
+```python
+num_ipus = 2
+num_replicas = num_ipus // 2
+gradient_accumulation_steps_per_replica = 8
+```
+#### 2. Modify model_fn to use PipelineStage wrappers
+
+```python
+    with keras.ipu.PipelineStage(0):
+        x = keras.layers.Conv2D(32, kernel_size=(3, 3), activation="relu")(input_layer)
+        x = keras.layers.MaxPooling2D(pool_size=(2, 2))(x)
+        x = keras.layers.Conv2D(64, kernel_size=(3, 3), activation="relu")(x)
+```
+#### 3. Adjust dataset sizes for pipelining requirements
+```python
+train_data_len = x_train.shape[0]
+train_steps_per_execution = train_data_len // (batch_size * num_replicas)
+# `steps_per_execution` needs to be divisible by 
+# `gradient_accumulation_steps_per_replica`
+train_steps_per_execution = make_divisible(train_steps_per_execution, gradient_accumulation_steps_per_replica)
+train_data_len = make_divisible(train_data_len, train_steps_per_execution * batch_size)
+x_train, y_train = x_train[:train_data_len], y_train[:train_data_len]
+
+
+test_data_len = x_test.shape[0]
+test_steps_per_execution = test_data_len // (batch_size * num_replicas)
+# `steps_per_execution` needs to be divisible by 
+# `gradient_accumulation_steps_per_replica`
+test_steps_per_execution = make_divisible(test_steps_per_execution, gradient_accumulation_steps_per_replica)
+test_data_len = make_divisible(test_data_len, test_steps_per_execution * batch_size)
+x_test, y_test = x_test[:test_data_len], y_test[:test_data_len]
+```
+
+#### 4. Update IPU config to use multiple IPUs
+- To use the IPU, you must create an IPU session configuration:
+```python
+ipu_config = ipu.config.IPUConfig()
+ipu_config.device_connection.type = ipu.config.DeviceConnectionType.ON_DEMAND
+ipu_config.auto_select_ipus = num_ipus
+ipu_config.configure_ipu_system()
+```
+
+#### 5. Set pipelining options
+
+```python
+    model.set_pipelining_options(
+        gradient_accumulation_steps_per_replica=gradient_accumulation_steps_per_replica,
+        pipeline_schedule=ipu.ops.pipelining_ops.PipelineSchedule.Grouped,
+    )
+```
+
+#### 6. Compile model for training and evaluation with steps_per_execution
+```python
+    model.compile(
+        "sgd",
+        "categorical_crossentropy",
+        metrics=["accuracy"],
+        steps_per_execution=train_steps_per_execution,
+    )
+```
+
+```python
+    model.compile(
+        "sgd",
+        "categorical_crossentropy",
+        metrics=["accuracy"],
+        steps_per_execution=test_steps_per_execution,
+    )
+```
