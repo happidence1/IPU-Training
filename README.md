@@ -259,7 +259,8 @@ from tensorflow.python import ipu
 #### 3. Add IPU configuration
 
 To use the IPU, you must create an IPU session configuration:
-```
+
+```python
 ipu_config = ipu.config.IPUConfig()
 ipu_config.auto_select_ipus = 1
 ipu_config.configure_ipu_system()
@@ -269,7 +270,7 @@ A full list of configuration options is available in the [API documentation](ht
 
 #### 4. Specify IPU strategy
 
-```
+```python
 strategy = ipu.ipu_strategy.IPUStrategy()
 ```
 
@@ -317,4 +318,15 @@ test_data_len = x_test.shape[0]
 test_steps_per_execution = test_data_len // (batch_size * num_replicas)
 test_data_len = make_divisible(test_data_len, batch_size * num_replicas)
 x_test, y_test = x_test[:test_data_len], y_test[:test_data_len]
+```
+
+#### 3. Update the configuration step
+
+- To use the IPU, you must create an IPU session configuration
+
+```python
+ipu_config = ipu.config.IPUConfig()
+ipu_config.device_connection.type = ipu.config.DeviceConnectionType.ON_DEMAND
+ipu_config.auto_select_ipus = num_ipus
+ipu_config.configure_ipu_system()
 ```
