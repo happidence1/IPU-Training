@@ -18,15 +18,15 @@ Credit to Graphcore tutorials https://github.com/graphcore/examples/tree/master/
     ```
 - Change to your directory:
     ```
-    cd /localdata/$USER && mkdir ipu_labs && cd ipu_labs
+    cd /localdata/$USER
     ```
-- Copy the example materials to your directory:
+- Copy the example and training materials to your directory:
     ```
-    git clone https://github.com/graphcore/examples.git
+    cp -r /scratch/training/ipu_labs/ .
     ```
-- Copy the hands-on exercise materials to your directory:
+- Change directory to ipu_labs:
     ```
-    git clone https://github.com/happidence1/IPU-Training.git
+    cd ipu_labs
     ```
 
 #### Poplar SDK setup
