@@ -49,7 +49,10 @@ virtualenv -p python3 venv_tf2
 
 source venv_tf2/bin/activate
 
-python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/tensorflow-2.6.3+gc3.3.0+251582+08d96978c7f+intel_skylake512-cp38-cp38-linux_x86_64.whl
+python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.4.0+1507-69d9d03fd8/tensorflow-2.6.3+gc3.4.0+253430+b2127bbabc0+amd_znver1-cp38-cp38-linux_x86_64.whl
+
+python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.4.0+1507-69d9d03fd8/keras-2.6.0+gc3.4.0+253427+164c0e60-py2.py3-none-any.whl
+
 ```
 
 #### Run a TensorFlow model on IPU
