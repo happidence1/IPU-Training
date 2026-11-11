@@ -83,7 +83,7 @@ virtualenv -p python3 poptorch_test
 
 source poptorch_test/bin/activate
 
-python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poptorch-3.3.0+113432_960e9c294b_ubuntu_20_04-cp38-cp38-linux_x86_64.whl
+python -m pip install /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.4.0+1507-69d9d03fd8/poptorch-3.4.0+114284_3d9956d403_ubuntu_20_04-cp38-cp38-linux_x86_64.whl
 ```
 
 #### Run a PopTorch model on IPU
