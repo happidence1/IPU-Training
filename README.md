@@ -11,10 +11,10 @@ Credit to Graphcore tutorials https://github.com/graphcore/examples/tree/master/
 
 #### Training Materials
 
-- From the ACES login node, ssh into the poplar2 (BOW Pod16) IPU system
+- From the ACES login node, ssh into the poplar1 (Colossus Pod16) IPU system
 
     ```
-    ssh poplar2
+    ssh poplar1
     ```
 - Change to your directory:
     ```
