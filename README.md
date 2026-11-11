@@ -32,14 +32,14 @@ Credit to Graphcore tutorials https://github.com/graphcore/examples/tree/master/
 #### Poplar SDK setup
 
 ```
-source /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/poplar-ubuntu_20_04-3.3.0+7857-b67b751185/enable.sh
-
-source /opt/gc/poplar/poplar_sdk-ubuntu_20_04-3.3.0+1403-208993bbb7/popart-ubuntu_20_04-3.3.0+7857-b67b751185/enable.sh
+# activate the poplar SDK
+source /usr/local/bin/source.poplar.sh
 
 mkdir -p /localdata/$USER/tmp
 export TF_POPLAR_FLAGS=--executable_cache_path=/localdata/$USER/tmp
 export POPTORCH_CACHE_DIR=/localdata/$USER/tmp
 export TORCH_HOME=/localdata/$USER/tmp/
+
 ```
 
 #### TF Virtual Environment Setup
