@@ -2,7 +2,7 @@
 
 TAMU Graphcore IPU training
 
-Credit to Graphcore tutorials https://github.com/graphcore/examples/tree/master/tutorials
+Credit to Graphcore tutorials https://github.com/graphcore/
 
 ## Code Snippets from Presentation
 
